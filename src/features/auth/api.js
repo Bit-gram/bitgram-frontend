@@ -1,21 +1,28 @@
-import axios from 'axios';
-
-const authApi = axios.create({
-  baseURL: 'http://localhost:8080',
-  headers: { 'Content-Type': 'application/json' }
-});
+import instance  from "../../lib/axios";
 
 export const login = async (email, password) => {
-  const response = await authApi.post('/api/auth/login', { email, password });
+  const data = await instance.post('/api/auth/login', { email, password });
   
-  const { accessToken, refreshToken } = response.data;
+  const { accessToken, refreshToken } = data; 
   localStorage.setItem('accessToken', accessToken);
   localStorage.setItem('refreshToken', refreshToken);
-  
-  return response.data;
+  localStorage.setItem('userEmail', email);
+
+  return data;
 };
 
 export const signup = async (userData) => {
-  const response = await authApi.post('/api/auth/signup', userData);
-  return response.data;
+  return await instance.post('/api/auth/signup', userData);
+};
+
+export const reissueToken = async () => {
+  const email = localStorage.getItem('userEmail');
+  const refreshToken = localStorage.getItem('refreshToken');
+  
+  const data = await instance.post('/api/auth/reissue', { email, refreshToken });
+  
+  const { accessToken } = data;
+  localStorage.setItem('accessToken', accessToken);
+  
+  return accessToken;
 };
