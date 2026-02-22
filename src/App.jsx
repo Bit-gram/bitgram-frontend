@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './features/auth/Login'; 
+import Login from './features/auth/Login';
+import OAuth2RedirectHandler from './features/auth/OAuth2RedirectHandler';
+import MainPage from './features/auth/MainPage';
 import './App.css';
 
 function App() {
@@ -8,7 +10,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/main" element={<h1>로그인 성공! 메인 페이지입니다.</h1>} />
+        <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />} />
+        <Route path="/main" element={<MainPage />} />
       </Routes>
     </Router>
   );
