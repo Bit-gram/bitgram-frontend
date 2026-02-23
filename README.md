@@ -22,7 +22,7 @@ Bitgram 프로젝트의 프론트엔드 저장소입니다.
 
 프로젝트를 로컬 환경에서 실행하는 방법입니다.
 
-**1. 저장소 클론 (Clone)**
+***1. 저장소 클론 (Clone)***
 
 ```bash
 git clone [https://github.com/Bit-gram/bitgram-frontend.git](https://github.com/Bit-gram/bitgram-frontend.git)
