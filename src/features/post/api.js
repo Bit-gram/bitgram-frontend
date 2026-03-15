@@ -1,9 +1,18 @@
+// src/features/post/api.js
 import instance from "../../lib/axios";
 
-// 게시물 목록 조회
-export const getPosts = async (page = 0, size = 10) => {
+export const getPosts = async ({ pageParam = 0 }) => {
   const response = await instance.get(
-    `/posts?page=${page}&size=${size}&sort=createdAt,DESC`,
+    `/api/posts?page=${pageParam}&size=5&sort=createdAt,DESC`,
   );
-  return response.data; // 백엔드 응답 그대로 반환 (Page 객체 등)
+  return response.data.data; // 백엔드의 Page 객체 리턴
+};
+
+export const createPost = async (formData) => {
+  const response = await instance.post("/api/posts", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return response.data;
 };
